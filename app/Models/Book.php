@@ -27,4 +27,16 @@ class Book extends Model
         "created_at" => "datetime",
         "updated_at" => "datetime"
     ];
+
+    private $rules = [
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'year' => 'integer',
+        'genre' => 'string'
+    ];
+
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
 }
