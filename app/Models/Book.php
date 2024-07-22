@@ -41,8 +41,8 @@ class Book extends Model
     private $rules = [
         'title' => 'required|string|max:255',
         'author' => 'required|string|max:255',
-        'year' => 'integer',
-        'genre' => 'string'
+        'year' => 'required|integer',
+        'genre' => 'string|nullable'
     ];
 
     public function getRules(): array
