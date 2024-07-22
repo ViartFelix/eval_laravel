@@ -12,14 +12,14 @@ class BookController extends Controller
 {
     public function index()
     {
-        return view("book", [
+        return view("books.index", [
             "books" => Book::all()
         ]);
     }
 
     public function create()
     {
-        return view("book/create");
+        return view("books.create");
     }
 
     public function store(Request $request)
@@ -31,54 +31,54 @@ class BookController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('book/create')
+            return redirect()->route("books.create")
                 ->withErrors($validator)
                 ->withInput();
         } else {
             // store
-
             $book->fill($allData);
             $book->save();
 
-            return Redirect::to('book')
+            return redirect()->route("books.index")
                 ->with("message", "Book added successfully!");
         }
     }
 
-    public function edit(Book $book)
+    public function edit(int $id)
     {
-        return view("book/show", [
+        $book = Book::findOrfail($id);
+
+        return view("books.edit", [
             "book" =>$book
         ]);
     }
 
-    public function update(Request $request, Book $book)
+    public function update(Request $request, int $id)
     {
+        $book = Book::findOrfail($id);
         $allData = $request->all();
 
         $validator = Validator::make($allData, $book->getRules());
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('book/edit', $book->id)
+            return redirect()->route("books.edit", $book->id)
                 ->withErrors($validator)
                 ->withInput();
         } else {
             // store
             $book->update($allData);
-            $book->save();
 
-            return Redirect::to('book')
+            return redirect()->route("books.index")
                 ->with("message", "Book updated successfully!");
         }
-
     }
 
-    public function destroy(Book $book)
+    public function destroy(int $id)
     {
-        $book->delete();
+        Book::destroy($id);
 
-        return Redirect::to("book")
+        return redirect()->route("books.index")
             ->with("message", "Book deleted successfully!");
     }
 }

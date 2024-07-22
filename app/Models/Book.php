@@ -28,6 +28,16 @@ class Book extends Model
         "updated_at" => "datetime"
     ];
 
+    protected $visible = [
+        "id",
+        "title",
+        "author",
+        "year",
+        "genre",
+        "created_at",
+        "updated_at"
+    ];
+
     private $rules = [
         'title' => 'required|string|max:255',
         'author' => 'required|string|max:255',

@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string("title", 255);
             $table->string("author", 255);
-
+            //TODO: year est pas nullable lul
             $table->integer("year")->nullable();
             $table->string("genre")->nullable();
             $table->timestamps();
