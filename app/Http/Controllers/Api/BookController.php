@@ -34,15 +34,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        try {
-            return response()->json([
-                "status" => "OK"
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                "message" => "Unknown error when showing form"
-            ], 500);
-        }
+
     }
 
     /**
